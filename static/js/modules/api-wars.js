@@ -1,9 +1,5 @@
-
-function fetchData(url, func){
-    $.getJSON(url, function(response){
-        func(response.results);
-    });
-}
+import {fetchData} from "./ajax.js";
+import {addCommas} from "./helper-functions.js";
 
 
 function displayPlanets(planets){
@@ -35,18 +31,3 @@ function displayPlanets(planets){
 }
 
 fetchData('https://swapi.co/api/planets', displayPlanets);
-
-
-function addCommas(numString){
-    let digits = Array.from(numString);
-    for (let i = digits.length; i >= 0; i = i-3){
-        digits.splice(i, 0, ",");
-    }
-    let newNumString = digits.join("");
-    if (newNumString.startsWith(",") && newNumString.endsWith(",")){
-        return newNumString.slice(1, -1);
-    }
-    else {
-        return newNumString.slice(0, -1);
-    }
-}
