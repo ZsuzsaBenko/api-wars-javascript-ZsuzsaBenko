@@ -1,12 +1,10 @@
 
-
-function fetchData(func){
-    fetch('https://swapi.co/api/planets')
-    .then((response) => response.json())
-    .then((data) => {
-        func(data.results);
+function fetchData(url, func){
+    $.getJSON(url, function(response){
+        func(response.results);
     });
 }
+
 
 function displayPlanets(planets){
     let features = ["name", "diameter", "climate", "terrain", "surface_water", "population"];
@@ -36,7 +34,7 @@ function displayPlanets(planets){
     }
 }
 
-fetchData(displayPlanets);
+fetchData('https://swapi.co/api/planets', displayPlanets);
 
 
 function addCommas(numString){
