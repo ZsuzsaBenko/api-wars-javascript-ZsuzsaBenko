@@ -1,0 +1,15 @@
+.planets {
+    margin: 0;
+    padding: 0;
+}
+.planets th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.planets th, td {
+    text-align: center;
+}
+.planets td:nth-child(2), .planets td:nth-child(5), .planets td:nth-child(6){
+    text-align: right;
+}
