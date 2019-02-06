@@ -1,14 +1,29 @@
-.planets {
+html body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.navbar {
+    display: block;
+ }
+.nav-item {
+    font-size: 22px;
+}
+h1 {
+    padding: 20px 0;
+}
+.planets {
+    margin: 20px 0 0 0;
     padding: 0;
 }
 .planets th, td {
     border: 1px solid black;
     border-collapse: collapse;
-    padding: 10px;
-}
-.planets th, td {
+    padding: 10px 20px;
     text-align: center;
+    font-size: 18px;
 }
 .planets td:nth-child(2), .planets td:nth-child(5), .planets td:nth-child(6){
     text-align: right;
