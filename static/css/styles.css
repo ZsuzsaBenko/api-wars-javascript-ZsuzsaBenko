@@ -18,7 +18,7 @@ h1 {
     margin: 20px 0 0 0;
     padding: 0;
 }
-.planets th, td {
+.planets th, .planets td, .residents th, .residents td {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 10px 20px;
@@ -27,4 +27,21 @@ h1 {
 }
 .planets td:nth-child(2), .planets td:nth-child(5), .planets td:nth-child(6){
     text-align: right;
+}
+.planets td:first-child, .residents td:first-child {
+    font-style: italic;
+    font-weight: bold;
+}
+.planets tbody tr:hover, .residents tbody tr:hover{
+    background-color: #eeeeee;
+}
+.residents {
+    margin: 0 auto;
+}
+.residents td:last-child {
+    font-size: 22px;
+}
+.modal-title {
+    font-size: 22px;
+    font-weight: bold;
 }
