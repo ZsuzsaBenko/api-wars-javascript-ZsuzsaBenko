@@ -10,18 +10,9 @@ function displayPlanets(response) {
     setButtonState(prevButton, response.previous);
 
     let planets = response.results;
-    let features = ["name", "diameter", "climate", "terrain", "surface water", "population", "residents"];
+    let features = ["name", "diameter", "climate", "terrain", "surface_water", "population", "residents"];
     let table = document.querySelector(".planets");
 
-    /*let thead = document.createElement("thead");
-    let tr = document.createElement("tr");
-    for (let feature of features) {
-        let th = document.createElement("th");
-        feature = feature[0].toUpperCase() + feature.slice(1);
-        th.innerText = feature;
-        tr.appendChild(th);
-    }
-    thead.appendChild(tr);*/
     let thead = createThead(features);
     table.appendChild(thead);
 
@@ -31,16 +22,19 @@ function displayPlanets(response) {
         for (let j = 0; j < features.length; j++) {
             let td = document.createElement("td");
             if (planets[i][features[j]] === "unknown") {
-                td.innerText = "unknown"
+                td.innerText = "unknown";
             } else if (features[j] === "diameter") {
                 td.innerText = addCommas(planets[i][features[j]]) + " km";
-            } else if (features[j] === "surface water") {
+            } else if (features[j] === "surface_water") {
                 td.innerText = planets[i]["surface_water"] + "%";
             } else if (features[j] === "population") {
                 td.innerText = addCommas(planets[i][features[j]]);
             } else if (features[j] === "residents") {
                 if (planets[i][features[j]].length > 0){
-                    createResidentsButton(td, planets, i, j, features)
+                    let residentsButton = createResidentsButton(td, `${planets[i][features[j]]}`,
+                        `${planets[i]["name"]}`);
+                    td.appendChild(residentsButton);
+                    residentsButton.addEventListener("click", showResidents);
                 } else {
                     td.innerText = "unknown";
                 }
@@ -60,6 +54,9 @@ function createThead(headings){
     for (let heading of headings) {
         let th = document.createElement("th");
         heading = heading[0].toUpperCase() + heading.slice(1);
+        if (heading.indexOf("_") !== -1){
+            heading = heading.slice(0, heading.indexOf("_")) + " " + heading.slice(heading.indexOf("_") + 1);
+        }
         th.innerText = heading;
         tr.appendChild(th);
     }
@@ -67,16 +64,15 @@ function createThead(headings){
     return thead
 }
 
-function createResidentsButton(td, planets, i, j, features){
+function createResidentsButton(td, dataAttr1, dataAttr2){
     let residentsButton = document.createElement("button");
     residentsButton.classList.add("residents-button");
     residentsButton.classList.add("btn");
     residentsButton.classList.add("btn-info");
-    residentsButton.setAttribute("data-resident-links", `${planets[i][features[j]]}`);
-    residentsButton.setAttribute("data-planet-name", `${planets[i]["name"]}`);
+    residentsButton.setAttribute("data-resident-links", dataAttr1);
+    residentsButton.setAttribute("data-planet-name", dataAttr2);
     residentsButton.innerText = "Residents";
-    td.appendChild(residentsButton);
-    residentsButton.addEventListener("click", showResidents);
+    return residentsButton
 }
 
 function setButtonState(button, condition) {
@@ -102,17 +98,12 @@ function showNextOrPrev(button, num){
 function prepareModal(title, headings){
     let modalTitle = document.querySelector("#modal .modal-title");
     modalTitle.textContent = title;
+
     let modalBodyTable = document.querySelector("#modal .modal-body table");
     modalBodyTable.innerHTML = "";
     modalBodyTable.classList.add("residents");
-    let thead = document.createElement("thead");
-    let tr = document.createElement("tr");
-    for (let i = 0; i < headings.length; i++){
-        let th = document.createElement("th");
-        th.innerText = headings[i];
-        tr.appendChild(th);
-    }
-    thead.appendChild(tr);
+
+    let thead = createThead(headings);
     modalBodyTable.appendChild(thead);
 
     let tbody = document.createElement("tbody");
@@ -158,8 +149,8 @@ function showResidents(event){
     let residentLinks = links.split(",");
     let planetName = button.dataset.planetName;
     let title = `Residents of ${planetName}`;
-    let headings = ["Name", "Height", "Mass", "Skin color", "Hair color", "Eye color", "Birth year", "Gender"];
-    prepareModal(title, headings);
+    let features = ["name", "height", "mass", "skin_color", "hair_color", "eye_color", "birth_year", "gender"];
+    prepareModal(title, features);
     for (let resident of residentLinks){
         fetchData(resident, displayResidents)
     }
