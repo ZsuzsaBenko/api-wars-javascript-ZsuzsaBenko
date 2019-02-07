@@ -12,7 +12,7 @@
                     <input type="text" name="username" id="username" minlength="5" maxlength="15" placeholder="username"
                            required autofocus>
                     <label for="password">Password:</label>
-                    <input {% if registration %} type="text" {% else %} type="password" {% endif %}
+                    <input {% if registration %} type="text" {% else %} type="password" {% endif %} name="password"
                             minlength="5" maxlength="15" placeholder="password" required>
                     <input type="submit" {% if registration %} value="Sign up" {% else %} value="Log in" {% endif %}>
                 </form>

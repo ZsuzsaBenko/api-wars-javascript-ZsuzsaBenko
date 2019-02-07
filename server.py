@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
+import data_manager
+import hashing
 
 
 app = Flask(__name__)
@@ -13,7 +15,16 @@ def route_index():
 def route_registration():
     registration = True
     if request.method == "POST":
-        pass
+        username = request.form["username"]
+        existing_username = data_manager.check_username(username)
+        if existing_username:
+            message = "Sorry, we already have a user by that username."
+            return render_template("register-login.html", registration=registration, message=message)
+        else:
+            password = request.form["password"]
+            hashed_password = hashing.hash_password(password)
+            data_manager.insert_user(username, hashed_password)
+            return redirect('/login')
     else:
         return render_template("register-login.html", registration=registration)
 
