@@ -34,7 +34,7 @@ function displayPlanets(response) {
                     let residentsButton = createResidentsButton(td, `${planets[i][features[j]]}`,
                         `${planets[i]["name"]}`);
                     td.appendChild(residentsButton);
-                    residentsButton.addEventListener("click", showResidents);
+                    residentsButton.addEventListener("click", showResidentsOnButtonClick);
                 } else {
                     td.innerText = "unknown";
                 }
@@ -110,7 +110,7 @@ function prepareModal(title, headings){
     modalBodyTable.appendChild(tbody);
 }
 
-function displayResidents(resident){
+function displayResident(resident){
     let features = ["name", "height", "mass", "skin_color", "hair_color", "eye_color", "birth_year", "gender"];
     let modalBodyTableTbody = document.querySelector("#modal .modal-body table tbody");
     let tr = document.createElement("tr");
@@ -143,7 +143,7 @@ function displayResidents(resident){
     $('#modal').modal();
 }
 
-function showResidents(event){
+function showResidentsOnButtonClick(event){
     let button = event.currentTarget;
     let links = button.dataset.residentLinks;
     let residentLinks = links.split(",");
@@ -152,7 +152,7 @@ function showResidents(event){
     let features = ["name", "height", "mass", "skin_color", "hair_color", "eye_color", "birth_year", "gender"];
     prepareModal(title, features);
     for (let resident of residentLinks){
-        fetchData(resident, displayResidents)
+        fetchData(resident, displayResident)
     }
 }
 

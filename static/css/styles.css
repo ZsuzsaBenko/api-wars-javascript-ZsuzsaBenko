@@ -45,3 +45,32 @@ h1 {
     font-size: 22px;
     font-weight: bold;
 }
+.login-form {
+    margin: 100px auto;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding:  30px 20px 50px;
+    box-shadow: 0 0 15px #aaa;
+}
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.login-form label, .login-form input {
+    display: block;
+    margin: 0 auto;
+}
+.login-form label {
+    text-align: center;
+    font-size: 18px;
+}
+.login-form input {
+    width: 300px;
+    padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+.login-form input[type="submit"]{
+    margin-top: 50px;
+}

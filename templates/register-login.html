@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        {% include "navbar.html" %}
+        <main class="row">
+            <div class="col-8 col-md-5 col-lg-4 login-form">
+                <h2>{% if registration %} Registration {% else %} Login {% endif %}</h2>
+                <form {% if registration %} action="{{ url_for('route_registration') }}"
+                      {% else %} action="{{ url_for('route_login') }}" {% endif %} method="POST">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" minlength="5" maxlength="15" placeholder="username"
+                           required autofocus>
+                    <label for="password">Password:</label>
+                    <input {% if registration %} type="text" {% else %} type="password" {% endif %}
+                            minlength="5" maxlength="15" placeholder="password" required>
+                    <input type="submit" {% if registration %} value="Sign up" {% else %} value="Log in" {% endif %}>
+                </form>
+            </div>
+        </main>
+    </div>
+{% endblock %}
