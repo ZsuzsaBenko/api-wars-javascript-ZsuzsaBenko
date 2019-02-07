@@ -16,6 +16,9 @@
                             minlength="5" maxlength="15" placeholder="password" required>
                     <input type="submit" {% if registration %} value="Sign up" {% else %} value="Log in" {% endif %}>
                 </form>
+                {% if message %}
+                <p id="errormessage">{{ message }}</p>
+                {% endif %}
             </div>
         </main>
     </div>

@@ -74,3 +74,7 @@ h1 {
 .login-form input[type="submit"]{
     margin-top: 50px;
 }
+#errormessage {
+    text-align: center;
+    color: red;
+}

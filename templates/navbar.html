@@ -7,9 +7,13 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="{{ url_for('route_index') }}">Planet list</a>
                 <a class="nav-item nav-link" href="#">Voting statistics</a>
-                <a class="nav-item nav-link" href="{{ url_for('route_registration') }}">Registration</a>
-                <a class="nav-item nav-link" href="{{ url_for('route_login') }}">Login</a>
-                <a class="nav-item nav-link" href="{{ url_for('route_logout') }}">Logout</a>
+                {% if status == "logged-in" %}
+                    <a class="nav-item nav-link" href="{{ url_for('route_logout') }}">Logout</a>
+                    <span>You are logged in as {{ session["username"] }}.</span>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('route_registration') }}">Registration</a>
+                    <a class="nav-item nav-link" href="{{ url_for('route_login') }}">Login</a>
+                {% endif %}
             </div>
         </div>
     </nav>

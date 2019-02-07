@@ -1,14 +1,20 @@
-from flask import Flask, render_template, request, redirect
+import os
+from flask import Flask, render_template, request, redirect, session, url_for
 import data_manager
 import hashing
 
 
 app = Flask(__name__)
+app.secret_key = os.urandom(16)
 
 
 @app.route('/', methods=['GET'])
 def route_index():
-    return render_template("index.html")
+    if "username" in session:
+        status = "logged-in"
+    else:
+        status = "logged-out"
+    return render_template("index.html", status=status)
 
 
 @app.route('/registration', methods=['GET', 'POST'])
@@ -24,7 +30,7 @@ def route_registration():
             password = request.form["password"]
             hashed_password = hashing.hash_password(password)
             data_manager.insert_user(username, hashed_password)
-            return redirect('/login')
+            return redirect(url_for('route_login'))
     else:
         return render_template("register-login.html", registration=registration)
 
@@ -32,14 +38,26 @@ def route_registration():
 @app.route('/login', methods=['POST', 'GET'])
 def route_login():
     if request.method == "POST":
-        pass
+        username = request.form["username"]
+        user = data_manager.check_username(username)
+        message = "Sorry, you entered an incorrect username or password."
+        if user:
+            password = request.form["password"]
+            if hashing.verify_password(password, user["password"]):
+                session["username"] = username
+                return redirect(url_for('route_index'))
+            else:
+                render_template("register-login.html", message=message)
+        else:
+            render_template("register-login.html", message=message)
     else:
         return render_template("register-login.html")
 
 
 @app.route('/logout')
 def route_logout():
-    pass
+    session.pop("username")
+    return redirect(url_for('route_index'))
 
 
 if __name__ == "__main__":
