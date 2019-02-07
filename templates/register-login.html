@@ -14,7 +14,8 @@
                     <label for="password">Password:</label>
                     <input {% if registration %} type="text" {% else %} type="password" {% endif %} name="password"
                             minlength="5" maxlength="15" placeholder="password" required>
-                    <input type="submit" {% if registration %} value="Sign up" {% else %} value="Log in" {% endif %}>
+                    <input type="submit" {% if registration %} value="Sign up" {% else %} value="Log in" {% endif %}
+                            class="btn bg-dark text-light">
                 </form>
                 {% if message %}
                 <p id="errormessage">{{ message }}</p>
