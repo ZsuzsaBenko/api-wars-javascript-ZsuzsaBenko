@@ -69,16 +69,17 @@ function createThead(){
 function showNextOrPrev(button, num){
     let table = document.querySelector(".planets");
     button.addEventListener("click", function(){
-        let page = parseInt(table.dataset.page);
-        table.dataset.page = `${page + num}`;
-        let newPage = table.dataset.page;
+        let page = sessionStorage.getItem("page");
+        sessionStorage.setItem("page", `${parseInt(page) + num}`);
+        page = sessionStorage.getItem("page");
         table.innerHTML = "";
-        fetchData(`https://swapi.co/api/planets/?page=${newPage}`, displayPlanets);
+        fetchData(`https://swapi.co/api/planets/?page=${page}`, displayPlanets);
     });
 }
 
 
 function main(){
+    sessionStorage.setItem("page", "1");
     let nextButton = document.querySelector("#next");
     let prevButton = document.querySelector("#prev");
     showNextOrPrev(nextButton, 1);
