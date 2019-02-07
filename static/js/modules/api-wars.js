@@ -1,4 +1,4 @@
-import {fetchData} from "./ajax.js";
+import {fetchData, spin} from "./ajax.js";
 import {addCommas} from "./helper-functions.js";
 
 
@@ -163,7 +163,7 @@ function main(){
     let prevButton = document.querySelector("#prev");
     showNextOrPrev(nextButton, 1);
     showNextOrPrev(prevButton, -1);
-
+    spin();
     fetchData(`https://swapi.co/api/planets/?page=1`, displayPlanets);
 
 }
