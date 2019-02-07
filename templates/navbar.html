@@ -1,22 +1,22 @@
 <header class="row">
-    <nav class="col-12 navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon text-light"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{{ url_for('route_index') }}">Planet list</a>
-                <a class="nav-item nav-link" href="#">Voting statistics</a>
+                <a class="nav-item nav-link text-light" href="{{ url_for('route_index') }}">Planet list</a>
+                <a class="nav-item nav-link text-light" href="#">Voting statistics</a>
                 {% if status == "logged-in" %}
-                    <a class="nav-item nav-link" href="{{ url_for('route_logout') }}">Logout</a>
+                    <a class="nav-item nav-link text-light" href="{{ url_for('route_logout') }}">Logout</a>
                 {% else %}
-                    <a class="nav-item nav-link" href="{{ url_for('route_registration') }}">Registration</a>
-                    <a class="nav-item nav-link" href="{{ url_for('route_login') }}">Login</a>
+                    <a class="nav-item nav-link text-light" href="{{ url_for('route_registration') }}">Registration</a>
+                    <a class="nav-item nav-link text-light" href="{{ url_for('route_login') }}">Login</a>
                 {% endif %}
             </div>
             {% if status == "logged-in" %}
                 <div class="logged-in">
-                    <p>You are logged in as {{ session["username"] }}.</p>
+                    <p class="text-light">You are logged in as {{ session["username"] }}.</p>
                 </div>
 
             {% endif %}

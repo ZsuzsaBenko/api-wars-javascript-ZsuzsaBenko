@@ -4,24 +4,44 @@ html body {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    background: url("../images/universe.jpg");
+    background-size: cover;
 }
+
+/* Header */
+
 .navbar {
     display: block;
  }
 .nav-item {
     font-size: 22px;
 }
-h1 {
-    padding: 20px 0;
+
+/* Main */
+
+main {
+    padding-bottom: 50px;
 }
+h1 {
+    padding: 40px;
+    color: white;
+    text-align: center;
+}
+#page-content {
+    width: 86%;
+    margin: 0 auto;
+}
+
+/* Main - planet table */
+
 .planets {
-    margin: 20px 0 0 0;
     padding: 0;
+    background-color: #fff;
 }
 .planets th, .planets td, .residents th, .residents td {
     border: 1px solid black;
     border-collapse: collapse;
-    padding: 10px 20px;
+    padding: 8px 15px;
     text-align: center;
     font-size: 18px;
 }
@@ -41,10 +61,16 @@ h1 {
 .residents td:last-child {
     font-size: 22px;
 }
+
+/* Modal */
+
 .modal-title {
     font-size: 22px;
     font-weight: bold;
 }
+
+/* Registration / login form */
+
 .login-form {
     margin: 100px auto;
     border: 1px solid #555;
@@ -90,6 +116,40 @@ h1 {
     padding: 0;
 }
 
+/* Loading spinner */
+
+#wait {
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 100%;
+    height: 1000px;
+}
+.spinner-border {
+    width: 100px;
+    height: 100px;
+    margin: 400px auto;
+}
+
+/* Footer */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+footer div {
+    line-height: 49px;
+    font-size: 30px;
+    text-align: center;
+    color: #fff;
+
+}
+
+/* Media queries*/
+
 @media only screen and (max-width: 1500px) {
     .logged-in {
         width: 70%;
@@ -110,17 +170,4 @@ h1 {
         display: inline;
         text-align: left;
     }
-}
-#wait {
-    position: absolute;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    width: 100%;
-    height: 1000px;
-}
-.spinner-border {
-    width: 50px;
-    height: 50px;
-    margin: 300px auto;
 }

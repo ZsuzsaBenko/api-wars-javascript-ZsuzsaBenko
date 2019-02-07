@@ -10,8 +10,14 @@ function displayPlanets(response) {
     setButtonState(prevButton, response.previous);
 
     let planets = response.results;
-    let features = ["name", "diameter", "climate", "terrain", "surface_water", "population", "residents"];
+
     let table = document.querySelector(".planets");
+    let loginStatus = table.dataset.loginStatus;
+
+    let features = ["name", "diameter", "climate", "terrain", "surface_water", "population", "residents"];
+    if (loginStatus === "logged-in"){
+        features = ["name", "diameter", "climate", "terrain", "surface_water", "population", "residents", " "];
+    }
 
     let thead = createThead(features);
     table.appendChild(thead);
@@ -30,7 +36,7 @@ function displayPlanets(response) {
             } else if (features[j] === "population") {
                 td.innerText = addCommas(planets[i][features[j]]);
             } else if (features[j] === "residents") {
-                if (planets[i][features[j]].length > 0){
+                if (planets[i][features[j]].length > 0) {
                     let residentsButton = createResidentsButton(td, `${planets[i][features[j]]}`,
                         `${planets[i]["name"]}`);
                     td.appendChild(residentsButton);
@@ -38,6 +44,13 @@ function displayPlanets(response) {
                 } else {
                     td.innerText = "unknown";
                 }
+            }
+            else if (features[j] === " "){
+                let voteButton = document.createElement("button");
+                voteButton.innerText = "Vote!";
+                voteButton.classList.add("btn");
+                voteButton.classList.add("btn-secondary");
+                td.appendChild(voteButton);
             } else {
                 td.innerText = planets[i][features[j]];
             }

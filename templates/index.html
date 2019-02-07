@@ -11,16 +11,18 @@
         <main class="row">
             <div class="col-12">
                 <h1>Star Wars universe planets</h1>
-                <button type="button" class="btn btn-info" id="prev">Previous</button>
-                <button type="button" class="btn btn-info" id="next">Next</button>
-                <table class="planets">
-                </table>
+                <div id="page-content">
+                    <button type="button" class="btn btn-info" id="prev">Previous</button>
+                    <button type="button" class="btn btn-info" id="next">Next</button>
+                    <table class="planets" data-login-status="{{ status }}"></table>
+                </div>
+
             </div>
             <div id ="modal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"></h5>
+                        <div class="modal-header bg-info">
+                            <h5 class="modal-title text-light"></h5>
                         </div>
                         <div class="modal-body">
                             <table>
@@ -33,11 +35,9 @@
                 </div>
             </div>
             <div id="wait" class="justify-content-center">
-                <div class="spinner-border" role="status"></div>
+                <div class="spinner-border text-light" role="status"></div>
             </div>
         </main>
-        <footer class="row">
-            <div class="col-12"></div>
-        </footer>
+        {% include "footer.html" %}
     </div>
 {% endblock %}
