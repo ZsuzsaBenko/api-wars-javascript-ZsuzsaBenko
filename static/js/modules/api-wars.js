@@ -1,5 +1,5 @@
 import {fetchData, spin} from "./ajax.js";
-import {addCommas} from "./helper-functions.js";
+import {addCommas, createThead, createButton, setButtonState} from "./helper-functions.js";
 
 
 function displayPlanets(response) {
@@ -37,8 +37,9 @@ function displayPlanets(response) {
                 td.innerText = addCommas(planets[i][features[j]]);
             } else if (features[j] === "residents") {
                 if (planets[i][features[j]].length > 0) {
-                    let residentsButton = createResidentsButton(td, `${planets[i][features[j]]}`,
-                        `${planets[i]["name"]}`);
+                    let residentsButton = createButton(["btn", "btn-info", "residents-button"],
+                        [{name: "data-resident-links", value: `${planets[i][features[j]]}`},
+                            {name: "data-planet-name", value: `${planets[i]["name"]}`}], "Residents");
                     td.appendChild(residentsButton);
                     residentsButton.addEventListener("click", showResidentsOnButtonClick);
                 } else {
@@ -46,10 +47,7 @@ function displayPlanets(response) {
                 }
             }
             else if (features[j] === " "){
-                let voteButton = document.createElement("button");
-                voteButton.innerText = "Vote!";
-                voteButton.classList.add("btn");
-                voteButton.classList.add("btn-secondary");
+                let voteButton = createButton(["btn", "btn-secondary"], [], "Vote!");
                 td.appendChild(voteButton);
             } else {
                 td.innerText = planets[i][features[j]];
@@ -59,41 +57,6 @@ function displayPlanets(response) {
         tbody.appendChild(tr);
     }
     table.appendChild(tbody);
-}
-
-function createThead(headings){
-    let thead = document.createElement("thead");
-    let tr = document.createElement("tr");
-    for (let heading of headings) {
-        let th = document.createElement("th");
-        heading = heading[0].toUpperCase() + heading.slice(1);
-        if (heading.indexOf("_") !== -1){
-            heading = heading.slice(0, heading.indexOf("_")) + " " + heading.slice(heading.indexOf("_") + 1);
-        }
-        th.innerText = heading;
-        tr.appendChild(th);
-    }
-    thead.appendChild(tr);
-    return thead
-}
-
-function createResidentsButton(td, dataAttr1, dataAttr2){
-    let residentsButton = document.createElement("button");
-    residentsButton.classList.add("residents-button");
-    residentsButton.classList.add("btn");
-    residentsButton.classList.add("btn-info");
-    residentsButton.setAttribute("data-resident-links", dataAttr1);
-    residentsButton.setAttribute("data-planet-name", dataAttr2);
-    residentsButton.innerText = "Residents";
-    return residentsButton
-}
-
-function setButtonState(button, condition) {
-    if (condition) {
-        button.removeAttribute("disabled");
-    } else {
-        button.setAttribute("disabled", "disabled");
-    }
 }
 
 

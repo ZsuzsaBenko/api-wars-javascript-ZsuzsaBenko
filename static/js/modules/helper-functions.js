@@ -1,3 +1,5 @@
+// general
+
 
 export function addCommas(numString){
     let digits = Array.from(numString);
@@ -12,3 +14,46 @@ export function addCommas(numString){
         return newNumString.slice(0, -1);
     }
 }
+
+
+// for DOM-manipulation
+
+
+export function createThead(headings){
+    let thead = document.createElement("thead");
+    let tr = document.createElement("tr");
+    for (let heading of headings) {
+        let th = document.createElement("th");
+        heading = heading[0].toUpperCase() + heading.slice(1);
+        if (heading.indexOf("_") !== -1){
+            heading = heading.slice(0, heading.indexOf("_")) + " " + heading.slice(heading.indexOf("_") + 1);
+        }
+        th.innerText = heading;
+        tr.appendChild(th);
+    }
+    thead.appendChild(tr);
+    return thead
+}
+
+
+export function createButton(classes, dataAttributes, text){
+    let newButton = document.createElement("button");
+    for (let i = 0; i < classes.length; i++){
+        newButton.classList.add(classes[i]);
+    }
+    for (let i = 0; i < dataAttributes.length; i++){
+        newButton.setAttribute(dataAttributes[i].name, dataAttributes[i].value);
+    }
+    newButton.innerText = text;
+    return newButton
+}
+
+
+export function setButtonState(button, condition) {
+    if (condition) {
+        button.removeAttribute("disabled");
+    } else {
+        button.setAttribute("disabled", "disabled");
+    }
+}
+
