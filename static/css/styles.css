@@ -54,7 +54,7 @@ h1 {
     font-weight: bold;
 }
 .planets tbody tr:hover, .residents tbody tr:hover{
-    background-color: #eeeeee;
+    background-color: #d5c3e0;
 }
 .residents {
     margin: 0 auto;
