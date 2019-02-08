@@ -48,9 +48,9 @@ def route_login():
                 session["user_id"] = user["id"]
                 return redirect(url_for('route_index'))
             else:
-                render_template("register-login.html", message=message)
+                return render_template("register-login.html", message=message)
         else:
-            render_template("register-login.html", message=message)
+            return render_template("register-login.html", message=message)
     else:
         return render_template("register-login.html")
 

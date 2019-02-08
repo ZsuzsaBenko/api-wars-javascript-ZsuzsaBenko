@@ -57,3 +57,31 @@ export function setButtonState(button, condition) {
     }
 }
 
+export function prepareModal(size, title, hasTable, headings, message){
+    let modalDialog = document.querySelector(".modal-dialog");
+    if (size === "small"){
+        modalDialog.classList.remove("modal-xl");
+    } else {
+        modalDialog.classList.add("modal-xl");
+    }
+
+    let modalTitle = document.querySelector("#modal .modal-title");
+    modalTitle.textContent = title;
+
+    let modalMessage = document.getElementById("modal-message");
+    let modalBodyTable = document.querySelector("#modal .modal-body table");
+
+    if (hasTable){
+        modalMessage.innerHTML = "";
+        modalBodyTable.innerHTML = "";
+        modalBodyTable.classList.add("residents");
+
+        let thead = createThead(headings);
+        modalBodyTable.appendChild(thead);
+
+        let tbody = document.createElement("tbody");
+        modalBodyTable.appendChild(tbody);
+    } else {
+        modalBodyTable.innerHTML = message;
+    }
+}

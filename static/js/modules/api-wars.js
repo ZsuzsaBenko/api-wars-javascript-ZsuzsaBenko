@@ -1,5 +1,5 @@
 import {fetchData, sendData, spin} from "./ajax.js";
-import {addCommas, createThead, createButton, setButtonState} from "./helper-functions.js";
+import {addCommas, createThead, createButton, setButtonState, prepareModal} from "./helper-functions.js";
 
 
 function displayPlanets(response) {
@@ -80,20 +80,6 @@ function showNextOrPrev(button, num){
     });
 }
 
-function prepareModal(title, headings){
-    let modalTitle = document.querySelector("#modal .modal-title");
-    modalTitle.textContent = title;
-
-    let modalBodyTable = document.querySelector("#modal .modal-body table");
-    modalBodyTable.innerHTML = "";
-    modalBodyTable.classList.add("residents");
-
-    let thead = createThead(headings);
-    modalBodyTable.appendChild(thead);
-
-    let tbody = document.createElement("tbody");
-    modalBodyTable.appendChild(tbody);
-}
 
 function displayResident(resident){
     let features = ["name", "height", "mass", "skin_color", "hair_color", "eye_color", "birth_year", "gender"];
@@ -135,11 +121,12 @@ function showResidentsOnButtonClick(event){
     let planetName = button.dataset.planetName;
     let title = `Residents of ${planetName}`;
     let features = ["name", "height", "mass", "skin_color", "hair_color", "eye_color", "birth_year", "gender"];
-    prepareModal(title, features);
+    prepareModal("large", title, true, features, "");
     for (let resident of residentLinks){
         fetchData(resident, displayResident)
     }
 }
+
 
 function savePlanetVote(event){
     let button = event.currentTarget;
@@ -152,9 +139,13 @@ function savePlanetVote(event){
     sendData('/save-vote', jsonData, sendSuccessMessage)
 }
 
+
 function sendSuccessMessage(){
-    alert("Your vote has been saved.")
+    let message = `<i class="fas fa-thumbs-up"></i> Your vote has been saved.`;
+    prepareModal("small", "Success!", false, "", message);
+    $('#modal').modal();
 }
+
 
 function main(){
     sessionStorage.setItem("page", "1");

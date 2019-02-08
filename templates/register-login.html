@@ -15,10 +15,10 @@
                     <input {% if registration %} type="text" {% else %} type="password" {% endif %} name="password"
                             minlength="5" maxlength="15" placeholder="password" required>
                     <input type="submit" {% if registration %} value="Sign up" {% else %} value="Log in" {% endif %}
-                            class="btn bg-dark text-light">
+                            class="btn bg-dark text-light" id="submit">
                 </form>
                 {% if message %}
-                <p id="errormessage">{{ message }}</p>
+                    <p id="errormessage">{{ message }}</p>
                 {% endif %}
             </div>
         </main>

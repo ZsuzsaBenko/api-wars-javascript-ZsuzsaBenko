@@ -69,6 +69,10 @@ h1 {
     font-size: 22px;
     font-weight: bold;
 }
+.fa-thumbs-up {
+    font-size: 30px;
+    margin-right: 10px;
+}
 
 /* Registration / login form */
 
