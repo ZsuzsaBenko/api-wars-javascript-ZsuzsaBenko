@@ -1,4 +1,4 @@
-import {fetchData, spin} from "./ajax.js";
+import {fetchData, saveVote, spin} from "./ajax.js";
 import {addCommas, createThead, createButton, setButtonState} from "./helper-functions.js";
 
 
@@ -37,9 +37,12 @@ function displayPlanets(response) {
                 td.innerText = addCommas(planets[i][features[j]]);
             } else if (features[j] === "residents") {
                 if (planets[i][features[j]].length > 0) {
+                    let buttonDataAttributes = [
+                        {name: "data-resident-links", value: `${planets[i][features[j]]}`},
+                        {name: "data-planet-name", value: `${planets[i]["name"]}`}
+                    ];
                     let residentsButton = createButton(["btn", "btn-info", "residents-button"],
-                        [{name: "data-resident-links", value: `${planets[i][features[j]]}`},
-                            {name: "data-planet-name", value: `${planets[i]["name"]}`}], "Residents");
+                        buttonDataAttributes, "Residents");
                     td.appendChild(residentsButton);
                     residentsButton.addEventListener("click", showResidentsOnButtonClick);
                 } else {
@@ -47,8 +50,15 @@ function displayPlanets(response) {
                 }
             }
             else if (features[j] === " "){
-                let voteButton = createButton(["btn", "btn-secondary"], [], "Vote!");
+                let planetLink = planets[i]["url"].split("/");
+                let buttonDataAttributes = [
+                    {name: "data-planet-id", value: planetLink[planetLink.length-2]},
+                    {name: "data-planet-name", value: `${planets[i]["name"]}`},
+                    {name: "data-user-id", value: table.dataset.userId},
+                ];
+                let voteButton = createButton(["btn", "btn-secondary"], buttonDataAttributes, "Vote!");
                 td.appendChild(voteButton);
+                voteButton.addEventListener("click", savePlanetVote);
             } else {
                 td.innerText = planets[i][features[j]];
             }
@@ -58,7 +68,6 @@ function displayPlanets(response) {
     }
     table.appendChild(tbody);
 }
-
 
 function showNextOrPrev(button, num){
     let table = document.querySelector(".planets");
@@ -132,6 +141,20 @@ function showResidentsOnButtonClick(event){
     }
 }
 
+function savePlanetVote(event){
+    let button = event.currentTarget;
+    let data = {
+        planet_id: parseInt(button.dataset.planetId),
+        planet_name: button.dataset.planetName,
+        user_id: parseInt(button.dataset.userId)
+    };
+    let jsonData = JSON.stringify(data);
+    saveVote('/save-vote', jsonData, sendSuccessMessage)
+}
+
+function sendSuccessMessage(){
+    alert("Your vote has been saved.")
+}
 
 function main(){
     sessionStorage.setItem("page", "1");

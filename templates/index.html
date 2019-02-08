@@ -14,7 +14,8 @@
                 <div id="page-content">
                     <button type="button" class="btn btn-info" id="prev">Previous</button>
                     <button type="button" class="btn btn-info" id="next">Next</button>
-                    <table class="planets" data-login-status="{{ status }}"></table>
+                    <table class="planets" data-login-status="{{ status }}" data-user-id="{{ session["user_id"] }}">
+                    </table>
                 </div>
 
             </div>

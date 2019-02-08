@@ -45,6 +45,7 @@ def route_login():
             password = request.form["password"]
             if hashing.verify_password(password, user["password"]):
                 session["username"] = username
+                session["user_id"] = user["id"]
                 return redirect(url_for('route_index'))
             else:
                 render_template("register-login.html", message=message)
@@ -58,6 +59,13 @@ def route_login():
 def route_logout():
     session.pop("username")
     return redirect(url_for('route_index'))
+
+
+@app.route('/save-vote', methods=["POST"])
+def route_save_vote():
+    data = request.get_json()
+    data_manager.insert_vote(data)
+    return '', 204
 
 
 if __name__ == "__main__":
