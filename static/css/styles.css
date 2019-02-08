@@ -107,7 +107,7 @@ h1 {
     margin-top: 50px;
 }
 .login-form input[type="submit"]:hover{
-    background-color: #222 !important;
+    background-color: #120121 !important;
 }
 #errormessage {
     text-align: center;
