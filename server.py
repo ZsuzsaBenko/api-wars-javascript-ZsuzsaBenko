@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 import data_manager
 import hashing
 
@@ -61,11 +61,17 @@ def route_logout():
     return redirect(url_for('route_index'))
 
 
-@app.route('/save-vote', methods=["POST"])
+@app.route('/save-vote', methods=['POST'])
 def route_save_vote():
     data = request.get_json()
     data_manager.insert_vote(data)
     return '', 204
+
+
+@app.route('/voted-planets', methods=['GET'])
+def route_voted_planets():
+    planet_votes = data_manager.get_planet_votes()
+    return jsonify(planet_votes)
 
 
 if __name__ == "__main__":

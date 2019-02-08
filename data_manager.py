@@ -31,3 +31,14 @@ def insert_vote(cursor, data):
                    """,
                    {"planet_id": data["planet_id"], "planet_name": data["planet_name"], "user_id": data["user_id"],
                     "submission_time": submission_time})
+
+
+@connection.connection_handler
+def get_planet_votes(cursor):
+    cursor.execute("""
+                    SELECT planet_name, COUNT(planet_id) AS "received_votes" FROM planet_votes
+                    GROUP BY planet_name
+                    ORDER BY received_votes DESC, planet_name ASC;
+                   """)
+    planet_votes = cursor.fetchall()
+    return planet_votes

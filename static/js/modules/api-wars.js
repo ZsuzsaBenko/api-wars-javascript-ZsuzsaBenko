@@ -147,6 +147,24 @@ function sendSuccessMessage(){
 }
 
 
+function displayVotedPlanets(planets){
+    let headings = ["planet_name", "received_votes"];
+    prepareModal("small", "Planets voted for", true, headings, "");
+    let modalBodyTableTbody = document.querySelector("#modal .modal-body table tbody");
+    for (let i = 0; i < planets.length; i++){
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        td1.innerText = planets[i]["planet_name"];
+        tr.appendChild(td1);
+        let td2 = document.createElement("td");
+        td2.innerText = planets[i]["received_votes"];
+        tr.appendChild(td2);
+        modalBodyTableTbody.appendChild(tr);
+    }
+    $('#modal').modal();
+}
+
+
 function main(){
     sessionStorage.setItem("page", "1");
 
@@ -154,6 +172,11 @@ function main(){
     let prevButton = document.querySelector("#prev");
     showNextOrPrev(nextButton, 1);
     showNextOrPrev(prevButton, -1);
+
+    let linkButton = document.querySelector("#voted-planets");
+    linkButton.addEventListener("click", function (ev) {
+        fetchData('/voted-planets', displayVotedPlanets);
+    });
 
     spin();
     fetchData(`https://swapi.co/api/planets/?page=1`, displayPlanets);

@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link text-light" href="{{ url_for('route_index') }}">Planet list</a>
-                <a class="nav-item nav-link text-light" href="#">Voting statistics</a>
+                <a class="nav-item nav-link text-light" href="#" id="voted-planets">Voting statistics</a>
                 {% if status == "logged-in" %}
                     <a class="nav-item nav-link text-light" href="{{ url_for('route_logout') }}">Logout</a>
                 {% else %}
