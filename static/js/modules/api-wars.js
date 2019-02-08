@@ -2,6 +2,8 @@ import {fetchData, sendData, spin} from "./ajax.js";
 import {addCommas, createThead, createButton, setButtonState, prepareModal} from "./helper-functions.js";
 
 
+// Index page, planet table with pagination
+
 function displayPlanets(response) {
 
     let nextButton = document.querySelector("#next");
@@ -70,6 +72,7 @@ function displayPlanets(response) {
     table.appendChild(tbody);
 }
 
+
 function showNextOrPrev(button, num){
     let table = document.querySelector(".planets");
     button.addEventListener("click", function(){
@@ -81,6 +84,8 @@ function showNextOrPrev(button, num){
     });
 }
 
+
+// Residents modal
 
 function displayResident(resident){
     let features = ["name", "height", "mass", "skin_color", "hair_color", "eye_color", "birth_year", "gender"];
@@ -129,6 +134,8 @@ function showResidentsOnButtonClick(event){
 }
 
 
+// Voting
+
 function savePlanetVote(event){
     let button = event.currentTarget;
     let data = {
@@ -145,6 +152,16 @@ function sendSuccessMessage(){
     let message = `<i class="fas fa-thumbs-up"></i> Your vote has been saved.`;
     prepareModal("small", "Success!", false, "", message);
     $('#modal').modal();
+}
+
+
+// Voted-for planets modal
+
+function showVotedPlanetsOnClick(){
+    let linkButton = document.querySelector("#voted-planets");
+    linkButton.addEventListener("click", function (ev) {
+        fetchData('/voted-planets', displayVotedPlanets);
+    });
 }
 
 
@@ -166,6 +183,9 @@ function displayVotedPlanets(planets){
 }
 
 
+/**********************************************************************************************************************/
+
+
 function main(){
     sessionStorage.setItem("page", "1");
 
@@ -174,10 +194,7 @@ function main(){
     showNextOrPrev(nextButton, 1);
     showNextOrPrev(prevButton, -1);
 
-    let linkButton = document.querySelector("#voted-planets");
-    linkButton.addEventListener("click", function (ev) {
-        fetchData('/voted-planets', displayVotedPlanets);
-    });
+    showVotedPlanetsOnClick();
 
     spin();
     fetchData(`https://swapi.co/api/planets/?page=1`, displayPlanets);
