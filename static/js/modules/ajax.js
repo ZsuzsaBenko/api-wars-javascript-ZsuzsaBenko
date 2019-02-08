@@ -5,7 +5,7 @@ export function fetchData(url, func){
     });
 }
 
-export function saveVote(url, data, func){
+export function sendData(url, data, func){
     $.ajax({
       type: "POST",
       url: url,

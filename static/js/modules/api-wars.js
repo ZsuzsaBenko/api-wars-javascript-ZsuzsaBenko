@@ -1,4 +1,4 @@
-import {fetchData, saveVote, spin} from "./ajax.js";
+import {fetchData, sendData, spin} from "./ajax.js";
 import {addCommas, createThead, createButton, setButtonState} from "./helper-functions.js";
 
 
@@ -149,7 +149,7 @@ function savePlanetVote(event){
         user_id: parseInt(button.dataset.userId)
     };
     let jsonData = JSON.stringify(data);
-    saveVote('/save-vote', jsonData, sendSuccessMessage)
+    sendData('/save-vote', jsonData, sendSuccessMessage)
 }
 
 function sendSuccessMessage(){
@@ -158,10 +158,12 @@ function sendSuccessMessage(){
 
 function main(){
     sessionStorage.setItem("page", "1");
+
     let nextButton = document.querySelector("#next");
     let prevButton = document.querySelector("#prev");
     showNextOrPrev(nextButton, 1);
     showNextOrPrev(prevButton, -1);
+
     spin();
     fetchData(`https://swapi.co/api/planets/?page=1`, displayPlanets);
 
