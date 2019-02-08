@@ -12,8 +12,8 @@
             <div class="col-12">
                 <h1>Star Wars universe planets</h1>
                 <div id="page-content">
-                    <button type="button" class="btn btn-info" id="prev">Previous</button>
-                    <button type="button" class="btn btn-info" id="next">Next</button>
+                    <button type="button" class="btn new-btn-info text-light" id="prev">Previous</button>
+                    <button type="button" class="btn new-btn-info text-light" id="next">Next</button>
                     <table class="planets" data-login-status="{{ status }}" data-user-id="{{ session["user_id"] }}">
                     </table>
                 </div>
@@ -22,7 +22,7 @@
             <div id ="modal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
-                        <div class="modal-header bg-info">
+                        <div class="modal-header new-bg-info">
                             <h5 class="modal-title text-light"></h5>
                         </div>
                         <div class="modal-body">
@@ -30,7 +30,8 @@
                             <p id="modal-message"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn new-btn-secondary text-light"
+                                    data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

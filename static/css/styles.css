@@ -180,3 +180,14 @@ footer div {
         text-align: left;
     }
 }
+
+/* Substitution for some Bootstrap colors */
+.new-bg-info, .new-btn-info {
+    background-color: #0d6ea3;
+}
+.new-bg-dark {
+    background-color: #1c112b;
+}
+.new-btn-secondary {
+    background-color: #45355b;
+}

@@ -41,12 +41,12 @@ function displayPlanets(response) {
                         {name: "data-resident-links", value: `${planets[i][features[j]]}`},
                         {name: "data-planet-name", value: `${planets[i]["name"]}`}
                     ];
-                    let residentsButton = createButton(["btn", "btn-info", "residents-button"],
-                        buttonDataAttributes, "Residents");
+                    let residentsButton = createButton(["btn", "new-btn-info", "text-light", "residents-button"],
+                        buttonDataAttributes, `${planets[i][features[j]].length} resident(s)`);
                     td.appendChild(residentsButton);
                     residentsButton.addEventListener("click", showResidentsOnButtonClick);
                 } else {
-                    td.innerText = "unknown";
+                    td.innerText = "no known residents";
                 }
             }
             else if (features[j] === " "){
@@ -56,7 +56,8 @@ function displayPlanets(response) {
                     {name: "data-planet-name", value: `${planets[i]["name"]}`},
                     {name: "data-user-id", value: table.dataset.userId},
                 ];
-                let voteButton = createButton(["btn", "btn-secondary"], buttonDataAttributes, "Vote!");
+                let voteButton = createButton(["btn", "new-btn-secondary", "text-light"],
+                    buttonDataAttributes, "Vote!");
                 td.appendChild(voteButton);
                 voteButton.addEventListener("click", savePlanetVote);
             } else {
