@@ -183,6 +183,22 @@ function displayVotedPlanets(planets){
 }
 
 
+// Extra feature: random Star Wars quote
+
+function showQuoteOnClick(){
+    let linkButton = document.querySelector("#quotes");
+    linkButton.addEventListener("click", function(ev) {
+            fetchData(" http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote", displayQuote);
+    });
+}
+
+
+function displayQuote(response) {
+    prepareModal("small", "Random Star Wars quote", false, "", response["starWarsQuote"]);
+    $('#modal').modal();
+}
+
+
 /**********************************************************************************************************************/
 
 
@@ -195,6 +211,7 @@ function main(){
     showNextOrPrev(prevButton, -1);
 
     showVotedPlanetsOnClick();
+    showQuoteOnClick();
 
     spin();
     fetchData(`https://swapi.co/api/planets/?page=1`, displayPlanets);
