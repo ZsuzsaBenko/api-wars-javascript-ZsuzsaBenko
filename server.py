@@ -74,7 +74,8 @@ def route_voted_planets():
     return jsonify(planet_votes)
 
 
-if __name__ == "__main__":
-    app.run(debug=True,
-            host="0.0.0.0",
-            port=8000)
+def main():
+    app.run(
+	debug=True,
+        host="0.0.0.0",
+        port=8000)
