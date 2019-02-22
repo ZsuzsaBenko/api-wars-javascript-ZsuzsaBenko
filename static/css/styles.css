@@ -114,7 +114,7 @@ h1 {
     color: red;
 }
 .logged-in {
-    width: 62%;
+    width: 75%;
     text-align: right;
     font-size: 22px;
     color: #777;
@@ -162,17 +162,17 @@ footer div {
 
 @media only screen and (max-width: 1500px) {
     .logged-in {
-        width: 60%;
+        width: 72%;
     }
 }
 @media only screen and (max-width: 1400px) {
     .logged-in {
-        width: 55%;
+        width: 70%;
     }
 }
 @media only screen and (max-width: 1300px) {
     .logged-in {
-        width: 40%;
+        width: 60%;
     }
 }
 @media only screen and (max-width: 1000px) {
