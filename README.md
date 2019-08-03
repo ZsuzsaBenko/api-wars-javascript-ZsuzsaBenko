@@ -5,4 +5,6 @@ The assignment focused on practicing AJAX calls and DOM-manipulation with JavaSc
 Users can register and after a successful login they can vote on their favourite planets. Python's Flask micro-framework
 is used on the server-side, users and their votes are stored in a PostgreSQL database. Authentication is handled via sessions.
 
+Technologies: Python / Flask, PostgreSQL, JavaScript, HTML5, CSS3.
+
 Link to Heroku-app: https://star-wars-galaxy-planets.herokuapp.com/#
